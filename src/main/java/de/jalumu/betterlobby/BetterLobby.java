@@ -1,0 +1,102 @@
+package de.jalumu.betterlobby;
+
+import de.jalumu.betterlobby.metrics.Metrics;
+import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
+
+
+public class BetterLobby extends JavaPlugin implements Listener{
+
+
+    private static boolean placeHolderApiEnabled = false;
+
+    private static boolean cloudnetApiEnabled = false;
+
+    private static Plugin plugin = null;
+
+    private static FileConfiguration configuration;
+
+    private final int pluginId = 6744;
+
+    private Registry registry;
+
+    @Override
+    public void onLoad() {
+        for (Player players : Bukkit.getOnlinePlayers()){
+            players.kickPlayer("Server Reload");
+        }
+    }
+
+    @Override
+    public void onEnable() {
+        plugin = this;
+
+        registry = new Registry(this);
+
+        registry.registerConfigurationSerializations();
+
+        configuration = getConfig();
+
+
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null){
+            getLogger().info("PlaceholderApi found");
+            placeHolderApiEnabled = true;
+        }else {
+            getLogger().warning("PlaceholderApi not found. Install PlaceholderApi to use Placeholder");
+            placeHolderApiEnabled = false;
+        }
+
+        if (Bukkit.getPluginManager().getPlugin("CloudNetAPI") != null){
+            getLogger().info("CloudNetAPI found");
+            cloudnetApiEnabled = true;
+        }else {
+            getLogger().info("CloudNetAPI not found. LobbySwitcher disabled");
+            placeHolderApiEnabled = false;
+        }
+
+        registry.registerConfigurations();
+
+        registry.registerListeners();
+
+        registry.registerCommands();
+
+        registry.registerOtherStuff();
+
+        saveConfiguration();
+
+        Metrics metrics = new Metrics(plugin,pluginId);
+
+    }
+
+    @Override
+    public void onDisable() {
+        plugin = null;
+    }
+
+
+    public static boolean isPlaceHolderApiEnabled() {
+        return placeHolderApiEnabled;
+    }
+
+    public static boolean isCloudnetApiEnabled() {
+        return cloudnetApiEnabled;
+    }
+
+    public static FileConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public static void saveConfiguration(){
+        configuration.options().copyDefaults(true);
+        plugin.saveConfig();
+    }
+
+
+
+
+
+}

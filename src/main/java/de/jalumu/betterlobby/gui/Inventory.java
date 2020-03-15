@@ -3,7 +3,6 @@ package de.jalumu.betterlobby.gui;
 import de.jalumu.betterlobby.BetterLobby;
 import de.jalumu.betterlobby.configuration.Configurable;
 import de.jalumu.betterlobby.util.TextUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.SkullType;
 import org.bukkit.entity.Player;
@@ -20,6 +19,8 @@ public class Inventory implements Configurable {
 
 	private static ItemStack lobbySwitcher;
 
+	private static InventoryItem friends;
+
 	@Override
 	public void defaultConfiguration() {
 		BetterLobby.getConfiguration().addDefault("inventory.teleporter.enabled",true);
@@ -27,7 +28,6 @@ public class Inventory implements Configurable {
 
 		ItemStack teleporter = ItemHelper.getItemStack(Material.COMPASS, "&6&lTeleporter", 1, Arrays.asList("&4Teleports you to another location"));
 		BetterLobby.getConfiguration().addDefault("inventory.teleporter.item",teleporter);
-
 
 		BetterLobby.getConfiguration().addDefault("inventory.playerVisibilityMenu.enabled",true);
 		BetterLobby.getConfiguration().addDefault("inventory.playerVisibilityMenu.slotId",1);
@@ -42,8 +42,8 @@ public class Inventory implements Configurable {
 		BetterLobby.getConfiguration().addDefault("inventory.lobbySwitcher.item",lobbySwitcher);
 
 		BetterLobby.getConfiguration().addDefault("inventory.friends.enabled",true);
-		BetterLobby.getConfiguration().addDefault("inventory.friends.slotId",8);
-		BetterLobby.getConfiguration().addDefault("inventory.friends.name","&6&lFriends");
+		InventoryItem friends = new InventoryItem(8,ItemHelper.getItemStack(Material.SKULL_ITEM,"&6&lFriends",1,Arrays.asList("&4Show or Hide Players")),ClickAction.COMMAND,"friends");
+		BetterLobby.getConfiguration().addDefault("inventory.friends.item",friends);
 	}
 
 
@@ -61,10 +61,6 @@ public class Inventory implements Configurable {
 		}else {
 			p.sendMessage("disabled");
 		}
-	}
-
-	public static void openFriends(Player p) {
-		Friends.open(p);
 	}
 	
 	public static void createBar(Player p) {
@@ -97,15 +93,33 @@ public class Inventory implements Configurable {
 
 		if (BetterLobby.getConfiguration().getBoolean("inventory.friends.enabled")) {
 
-			ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal());
+			if (friends == null){
+				friends = (InventoryItem) BetterLobby.getConfiguration().get("inventory.friends.item");
+				ItemHelper.registerHotbarClickEvent(friends.getIndex(), new ClickEvent() {
+					@Override
+					public void onClick(Player player) {
+						if (friends.getClickAction() == ClickAction.COMMAND){
+							ClickEvents.commandEvent(player,friends.getTarget());
+						}else if (friends.getClickAction() == ClickAction.TELEPORT){
+							ClickEvents.teleportEvent(player,friends.getTarget());
+						}
+					}
+				});
+			}
+			if (friends.getItemStack().getType() == Material.SKULL_ITEM){
+				ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal());
 
-			SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
+				SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
 
-			skullMeta.setOwner(p.getName());
-			skullMeta.setDisplayName(TextUtil.parse(BetterLobby.getConfiguration().getString("inventory.friends.name")));
-			skull.setItemMeta(skullMeta);
+				skullMeta.setOwner(p.getName());
+				skullMeta.setDisplayName(TextUtil.parse(friends.getItemStack().getItemMeta().getDisplayName()));
+				skullMeta.setLore(TextUtil.parse(friends.getItemStack().getItemMeta().getLore()));
+				skull.setItemMeta(skullMeta);
+				p.getInventory().setItem(friends.getIndex(), skull);
+			}else {
+				p.getInventory().setItem(friends.getIndex(),friends.getItemStack());
+			}
 
-			p.getInventory().setItem(BetterLobby.getConfiguration().getInt("inventory.friends.slotId"), skull);
 		}
 
 		p.updateInventory();

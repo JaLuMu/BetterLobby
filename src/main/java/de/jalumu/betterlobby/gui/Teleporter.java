@@ -48,9 +48,9 @@ public class Teleporter implements Configurable {
 
 			for (InventoryItem item : items){
 				if (item.getClickAction() == ClickAction.TELEPORT){
-					ItemHelper.registerClickEvent(item.getItemStack(), player1 -> teleportEvent(player1,item.getTarget()));
+					ItemHelper.registerClickEvent(item.getItemStack(), player1 -> ClickEvents.teleportEvent(player1,item.getTarget()));
 				}else if (item.getClickAction() == ClickAction.COMMAND){
-					ItemHelper.registerClickEvent(item.getItemStack(), player1 -> commandEvent(player1,item.getTarget()));
+					ItemHelper.registerClickEvent(item.getItemStack(), player1 -> ClickEvents.commandEvent(player1,item.getTarget()));
 				}
 			}
 
@@ -72,16 +72,6 @@ public class Teleporter implements Configurable {
 
 
 
-	private static void teleportEvent(Player player, String target){
-		if (BetterLobby.getConfiguration().contains("location." + target)){
-			player.teleport((Location) BetterLobby.getConfiguration().get("location." + target));
-		}else {
-			player.sendMessage("Location " + target + " not found");
-		}
-	}
 
-	private static void commandEvent(Player player, String target) {
-		Bukkit.dispatchCommand(player,target);
-	}
 
 }

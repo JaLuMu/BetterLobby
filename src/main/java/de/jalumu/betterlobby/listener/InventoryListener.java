@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 
@@ -23,16 +22,13 @@ public class InventoryListener implements Listener, Configurable {
 
     @EventHandler
     public void onInteract(PlayerInteractEvent event){
-       if (event.getItem() != null){
-           ItemHelper.handle(event.getItem(),event.getPlayer());
-       }
+       ItemHelper.handleInteraction(event);
     }
 
     @EventHandler
     public void onClick(InventoryClickEvent event){
-        Player player = (Player) event.getWhoClicked();
-        ItemHelper.handle(event.getCurrentItem(), player);
-        if (!BuildManager.canBuild(player)){
+       ItemHelper.handleInventory(event);
+        if (!BuildManager.canBuild((Player) event.getWhoClicked())){
             event.setCancelled(true);
         }
     }

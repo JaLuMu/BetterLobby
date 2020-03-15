@@ -23,7 +23,6 @@ public class InventoryItem implements ConfigurationSerializable {
         }else {
             this.target = target;
         }
-
     }
 
     public InventoryItem(Map<String,Object> map){
@@ -36,7 +35,6 @@ public class InventoryItem implements ConfigurationSerializable {
     public int getIndex() {
         return index;
     }
-
 
     public ItemStack getItemStack() {
         return itemStack;

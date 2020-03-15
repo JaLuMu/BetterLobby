@@ -1,0 +1,11 @@
+name: BetterLobby
+version: Dev
+main: de.jalumu.betterlobby.BetterLobby
+author: JanLuca
+commands:
+  build:
+    permission: lobby.build
+  setSpawn:
+    permission: lobby.setspawn
+
+softdepend: [PlaceholderAPI,CloudNetAPI]

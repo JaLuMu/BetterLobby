@@ -7,10 +7,7 @@ import de.jalumu.betterlobby.gui.Inventory;
 import de.jalumu.betterlobby.gui.InventoryItem;
 import de.jalumu.betterlobby.gui.PlayerVisibilityMenu;
 import de.jalumu.betterlobby.gui.Teleporter;
-import de.jalumu.betterlobby.listener.InventoryListener;
-import de.jalumu.betterlobby.listener.JoinLeaveListener;
-import de.jalumu.betterlobby.listener.MovementListener;
-import de.jalumu.betterlobby.listener.WorldInteractionListener;
+import de.jalumu.betterlobby.listener.*;
 import de.jalumu.betterlobby.manager.ScoreboardManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
@@ -42,6 +39,7 @@ public class Registry {
         registerListener(new MovementListener());
         registerListener(new InventoryListener());
         registerListener(new WorldInteractionListener());
+        registerListener(new WeatherListener());
     }
 
     public void registerCommands(){

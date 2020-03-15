@@ -36,7 +36,7 @@ public class SpawnCommand implements CommandExecutor {
                         new Transmission(ChatColor.RED + "There is currently no Spawn-Point!").send(currentPlayer);
 
                 } else
-                    new Transmission(ChatColor.RED + "There is currently no Spawn-Point!").send(sender);
+                    new Transmission(ChatColor.RED + "You are not a player").send(sender);
             } else
                 new Transmission("Please use " + ChatColor.RED + command.getUsage().replaceAll("<command>", command.getName())).send(sender);
         } else

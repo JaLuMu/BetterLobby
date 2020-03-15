@@ -3,6 +3,8 @@ version: @version@
 main: de.jalumu.betterlobby.BetterLobby
 author: JanLuca
 commands:
+  betterlobby:
+    description: Shows plugin infos
   build:
     permission: lobby.build
   setSpawn:

@@ -7,5 +7,7 @@ commands:
     permission: lobby.build
   setSpawn:
     permission: lobby.setspawn
+  spawn:
+    permission: lobby.spawn
 
 softdepend: [PlaceholderAPI,CloudNetAPI]

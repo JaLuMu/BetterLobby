@@ -9,5 +9,7 @@ commands:
     permission: lobby.setspawn
   spawn:
     permission: lobby.spawn
+  push:
+    permission: lobby.push
 
 softdepend: [PlaceholderAPI,CloudNetAPI]

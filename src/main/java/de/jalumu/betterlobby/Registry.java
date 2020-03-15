@@ -1,6 +1,7 @@
 package de.jalumu.betterlobby;
 
 import de.jalumu.betterlobby.commands.BuildCommand;
+import de.jalumu.betterlobby.commands.PushCommand;
 import de.jalumu.betterlobby.commands.SetSpawnCommand;
 import de.jalumu.betterlobby.commands.SpawnCommand;
 import de.jalumu.betterlobby.configuration.Configurable;
@@ -47,6 +48,7 @@ public class Registry {
         registerCommand("build", new BuildCommand());
         registerCommand("setSpawn",new SetSpawnCommand());
         registerCommand("spawn", new SpawnCommand());
+        registerCommand("push", new PushCommand());
     }
 
     public void registerOtherStuff(){

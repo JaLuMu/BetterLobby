@@ -1,6 +1,7 @@
 package de.jalumu.betterlobby.gui;
 
 
+import de.jalumu.betterlobby.BetterLobby;
 import de.jalumu.betterlobby.util.TextUtil;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -74,6 +75,12 @@ public class ItemHelper {
         if (event.getCurrentItem() != null && inventoryEvents.containsKey(event.getCurrentItem())){
             inventoryEvents.get(event.getCurrentItem()).onClick((Player) event.getWhoClicked());
         }
+        if (event.getClickedInventory() != null) {
+            if (event.getClickedInventory().getName().equals(TextUtil.parse(BetterLobby.getConfiguration().getString("inventory.lobbySwitcher.title")))) {
+                LobbySwitcher.handleClickEvent(event);
+            }
+        }
+
     }
 
     public static void handleInteraction(PlayerInteractEvent event){

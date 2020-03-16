@@ -1,5 +1,5 @@
 name: BetterLobby
-version: DEV
+version: Dev
 main: de.jalumu.betterlobby.BetterLobby
 author: JanLuca
 commands:
@@ -15,5 +15,9 @@ commands:
     permission: lobby.push
   fly:
     permission: lobby.fly
+  heal:
+    permission: lobby.heal
+  deathmatch:
+    permission: lobby.deathmatch
 
 softdepend: [PlaceholderAPI, HolographicDisplays, CloudNetAPI]

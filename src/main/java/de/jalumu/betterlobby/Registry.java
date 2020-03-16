@@ -51,6 +51,7 @@ public class Registry {
         registerCommand("push", new PushCommand());
         registerCommand("fly", new FlyCommand());
         registerCommand("heal", new HealCommand());
+        registerCommand("deathmatch", new DeathmatchCommand());
     }
 
     public void registerOtherStuff(){

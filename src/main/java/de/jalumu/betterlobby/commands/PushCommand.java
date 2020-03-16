@@ -13,6 +13,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * This class adds a minecraft-bukkit command
+ *
+ * This command pushs players into the air
+ * @version 1.0
+ */
+
 public class PushCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {

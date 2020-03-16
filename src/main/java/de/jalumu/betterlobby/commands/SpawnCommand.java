@@ -12,6 +12,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
+/**
+ * This class adds a minecraft-bukkit command
+ *
+ * This command teleport players to the spawn-point!
+ * @version 1.0
+ */
+
 public class SpawnCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {

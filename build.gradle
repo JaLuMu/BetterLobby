@@ -29,12 +29,17 @@ repositories {
         name = 'papi-repo'
         url = 'http://repo.extendedclip.com/content/repositories/placeholderapi/'
     }
+    maven {
+        name = 'jitpack'
+        url 'https://jitpack.io'
+    }
 }
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
     compileOnly "de.dytanic.cloudnet:cloudnet-api-bridge:2.1.17"
     compileOnly 'me.clip:placeholderapi:2.10.4'
+    compileOnly 'com.github.filoghost.HolographicDisplays:holographicdisplays-api:770c86947b'
 }
 
 import org.apache.tools.ant.filters.ReplaceTokens

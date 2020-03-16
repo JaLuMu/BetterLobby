@@ -4,6 +4,8 @@ import de.jalumu.betterlobby.BetterLobby;
 import de.jalumu.betterlobby.configuration.Configurable;
 import de.jalumu.betterlobby.gui.ItemHelper;
 import de.jalumu.betterlobby.manager.BuildManager;
+import de.jalumu.betterlobby.manager.FightManager;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -41,6 +43,12 @@ public class InventoryListener implements Listener, Configurable {
                     player.getLocation(),
                     Sound.valueOf(BetterLobby.getConfiguration().getString("inventory.hotbar.sound.sound")),
                     3, 2);
+        }
+        int slot = event.getNewSlot();
+        if (player.getInventory().getItem(slot) != null && player.getInventory().getItem(slot).getType().equals(Material.IRON_SWORD)){
+            FightManager.allowFight(player,true);
+        }else {
+            FightManager.allowFight(player,false);
         }
     }
 

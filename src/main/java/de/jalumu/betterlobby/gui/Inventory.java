@@ -19,6 +19,8 @@ public class Inventory implements Configurable {
 
 	private static ItemStack lobbySwitcher;
 
+	private static ItemStack sword;
+
 	private static InventoryItem friends;
 
 	@Override
@@ -44,6 +46,11 @@ public class Inventory implements Configurable {
 		BetterLobby.getConfiguration().addDefault("inventory.friends.enabled",true);
 		InventoryItem friends = new InventoryItem(8,ItemHelper.getItemStack(Material.SKULL_ITEM,"&6&lFriends",1,Arrays.asList("&4Show or Hide Players")),ClickAction.COMMAND,"friends");
 		BetterLobby.getConfiguration().addDefault("inventory.friends.item",friends);
+
+		BetterLobby.getConfiguration().addDefault("inventory.sword.enabled",true);
+		BetterLobby.getConfiguration().addDefault("inventory.sword.slotId",3);
+		ItemStack sword = ItemHelper.getItemStack(Material.IRON_SWORD,"&6&lLets Fight",1,Arrays.asList("&4Fight with other Players"));
+		BetterLobby.getConfiguration().addDefault("inventory.sword.item",sword);
 	}
 
 
@@ -91,6 +98,8 @@ public class Inventory implements Configurable {
 			p.getInventory().setItem(BetterLobby.getConfiguration().getInt("inventory.lobbySwitcher.slotId"), lobbySwitcher);
 		}
 
+
+
 		if (BetterLobby.getConfiguration().getBoolean("inventory.friends.enabled")) {
 
 			if (friends == null){
@@ -120,6 +129,14 @@ public class Inventory implements Configurable {
 				p.getInventory().setItem(friends.getIndex(),friends.getItemStack());
 			}
 
+		}
+
+		if (BetterLobby.getConfiguration().getBoolean("inventory.sword.enabled")) {
+			if (sword == null){
+				sword = TextUtil.parse(BetterLobby.getConfiguration().getItemStack("inventory.sword.item"));
+			}
+			p.getInventory().setItem(BetterLobby.getConfiguration().getInt("inventory.sword.slotId"), sword);
+			p.sendMessage(BetterLobby.getConfiguration().getInt("inventory.sword.slotId") + "");
 		}
 
 		p.updateInventory();

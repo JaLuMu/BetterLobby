@@ -16,6 +16,8 @@ public class BetterLobby extends JavaPlugin implements Listener{
 
     private static boolean cloudnetApiEnabled = false;
 
+    private static boolean holographicDisplaysEnabled = false;
+
     private static Plugin plugin = null;
 
     private static FileConfiguration configuration;
@@ -50,6 +52,14 @@ public class BetterLobby extends JavaPlugin implements Listener{
             placeHolderApiEnabled = false;
         }
 
+        if (Bukkit.getPluginManager().getPlugin("HolographicDisplays") != null){
+            getLogger().info("HolographicDisplays found");
+            holographicDisplaysEnabled = true;
+        }else {
+            getLogger().info("HolographicDisplays not found. Holograms disabled");
+            holographicDisplaysEnabled = false;
+        }
+
         if (Bukkit.getPluginManager().getPlugin("CloudNetAPI") != null){
             getLogger().info("CloudNetAPI found");
             cloudnetApiEnabled = true;
@@ -80,6 +90,10 @@ public class BetterLobby extends JavaPlugin implements Listener{
 
     public static boolean isPlaceHolderApiEnabled() {
         return placeHolderApiEnabled;
+    }
+
+    public static boolean isHolographicDisplaysEnabled() {
+        return holographicDisplaysEnabled;
     }
 
     public static boolean isCloudnetApiEnabled() {

@@ -12,6 +12,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
+/**
+ * This class adds a minecraft-bukkit command
+ *
+ * This command teleport players to the spawn-point!
+ * @version 1.0
+ */
+
 public class SpawnCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -36,7 +43,7 @@ public class SpawnCommand implements CommandExecutor {
                         new Transmission(ChatColor.RED + "There is currently no Spawn-Point!").send(currentPlayer);
 
                 } else
-                    new Transmission(ChatColor.RED + "There is currently no Spawn-Point!").send(sender);
+                    new Transmission(ChatColor.RED + "You are not a player").send(sender);
             } else
                 new Transmission("Please use " + ChatColor.RED + command.getUsage().replaceAll("<command>", command.getName())).send(sender);
         } else

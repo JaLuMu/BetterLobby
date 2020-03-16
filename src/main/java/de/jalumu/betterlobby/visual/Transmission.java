@@ -1,5 +1,6 @@
 package de.jalumu.betterlobby.visual;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
@@ -11,8 +12,20 @@ public class Transmission {
         this.message = message;
     }
 
+    public String getTransmissionContent() {
+        return ChatColor.DARK_GRAY + ">> " + ChatColor.GRAY + message;
+    }
+
     public void send(CommandSender sender) {
-        sender.sendMessage(ChatColor.DARK_GRAY + ">> " + ChatColor.GRAY + message);
+        sender.sendMessage(getTransmissionContent());
+    }
+
+    public void broadcast() {
+        Bukkit.broadcastMessage(getTransmissionContent());
+    }
+
+    public void sendConsole() {
+        Bukkit.getConsoleSender().sendMessage(getTransmissionContent());
     }
 
     public String getMessage() {

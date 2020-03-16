@@ -39,6 +39,7 @@ public class Registry {
         registerListener(new InventoryListener());
         registerListener(new WorldInteractionListener());
         registerListener(new WeatherListener());
+        registerListener(new EntityListener());
     }
 
     public void registerCommands(){

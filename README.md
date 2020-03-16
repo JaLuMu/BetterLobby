@@ -39,4 +39,3 @@ Changes in this repository will be automatically synchronized with the Minecraft
 This Plugin uses the Metrics System from [bstats.org](https://bstats.org/)  
  You can disable it in the bstats Config.
 ![bstats Metrics](https://bstats.org/signatures/bukkit/BetterLobby.svg)
-g/signatures/bukkit/BetterLobby.svg)

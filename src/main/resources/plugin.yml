@@ -18,4 +18,4 @@ commands:
   heal:
     permission: lobby.heal
 
-softdepend: [PlaceholderAPI,CloudNetAPI]
+softdepend: [PlaceholderAPI, HolographicDisplays, CloudNetAPI]

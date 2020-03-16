@@ -4,6 +4,8 @@ import de.jalumu.betterlobby.BetterLobby;
 import de.jalumu.betterlobby.configuration.Configurable;
 import de.jalumu.betterlobby.manager.BuildManager;
 import de.jalumu.betterlobby.gui.Inventory;
+import de.jalumu.betterlobby.manager.FightManager;
+import de.jalumu.betterlobby.manager.HologramMannager;
 import de.jalumu.betterlobby.manager.ScoreboardManager;
 import de.jalumu.betterlobby.util.TextUtil;
 import de.jalumu.betterlobby.util.Title;
@@ -76,7 +78,7 @@ public class JoinLeaveListener implements Listener, Configurable {
 		Player player = event.getPlayer();
 
 		BuildManager.allowBuilding(player,false);
-
+		FightManager.allowFight(player,false);
 	}
 
 

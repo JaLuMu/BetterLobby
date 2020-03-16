@@ -16,4 +16,4 @@ commands:
   fly:
     permission: lobby.fly
 
-softdepend: [PlaceholderAPI,CloudNetAPI]
+softdepend: [PlaceholderAPI, HolographicDisplays, CloudNetAPI]

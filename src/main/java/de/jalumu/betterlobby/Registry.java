@@ -7,6 +7,7 @@ import de.jalumu.betterlobby.gui.InventoryItem;
 import de.jalumu.betterlobby.gui.PlayerVisibilityMenu;
 import de.jalumu.betterlobby.gui.Teleporter;
 import de.jalumu.betterlobby.listener.*;
+import de.jalumu.betterlobby.manager.HologramMannager;
 import de.jalumu.betterlobby.manager.ScoreboardManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
@@ -52,6 +53,7 @@ public class Registry {
 
     public void registerOtherStuff(){
         registerConfig(new ScoreboardManager(betterLobby));
+        new HologramMannager(betterLobby);
     }
 
     private void registerCommand(String name, CommandExecutor executor){

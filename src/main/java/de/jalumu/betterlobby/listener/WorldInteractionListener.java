@@ -1,6 +1,7 @@
 package de.jalumu.betterlobby.listener;
 
 import de.jalumu.betterlobby.manager.BuildManager;
+import de.jalumu.betterlobby.manager.FightManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -8,6 +9,8 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerItemBreakEvent;
+import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 
 
@@ -58,9 +61,18 @@ public class WorldInteractionListener implements Listener {
 	public void onEntityDamage(EntityDamageByEntityEvent event) {
 		if (event.getDamager() instanceof Player){
 			Player player = (Player)event.getDamager();
-			if (!BuildManager.canBuild(player)){
+			if (!BuildManager.canBuild(player) ){
 				event.setCancelled(true);
 			}
+
+			if (event.getEntity() instanceof Player){
+				Player damaged = (Player) event.getEntity();
+				if (FightManager.canFight(player) && FightManager.canFight(damaged)){
+					event.setDamage(0);
+					event.setCancelled(false);
+				}
+			}
+
 		}else {
 			event.setCancelled(true);
 		}
@@ -73,6 +85,12 @@ public class WorldInteractionListener implements Listener {
 
 	@EventHandler
 	public void onFoodLevelChange(FoodLevelChangeEvent event) {
+		event.setCancelled(true);
+	}
+
+	@EventHandler
+	public void onItemDamage(PlayerItemDamageEvent event){
+		event.setDamage(0);
 		event.setCancelled(true);
 	}
 

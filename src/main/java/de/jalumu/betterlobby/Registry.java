@@ -47,6 +47,7 @@ public class Registry {
         registerCommand("setSpawn",new SetSpawnCommand());
         registerCommand("spawn", new SpawnCommand());
         registerCommand("push", new PushCommand());
+        registerCommand("fly", new FlyCommand());
     }
 
     public void registerOtherStuff(){

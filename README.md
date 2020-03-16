@@ -11,9 +11,29 @@ Changes in this repository will be automatically synchronized with the Minecraft
  - Friends Item with custom Command
  - Customizable Scoreboard with [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/) support
 # Commands and Permissions
- - build `lobby.build`
- - setSpawn `lobby.setspawn`
- - spawn `lobby.spawn`
+ - #### build `lobby.build`
+ 
+    Allows or forbids a player to modify the physical matter on the server
+ 
+ - #### setSpawn `lobby.setspawn`
+ 
+    Sets the current spawn-point to your current player position
+ 
+ - #### spawn `lobby.spawn`
+ 
+    Teleports a player to the current spawn-point, which can be set with the 'setspawn' command. 
+ 
+ - #### push `lobby.push`
+ 
+    Shoot a player high into the air! Is he coming back down?
+ 
+ - fly `lobby.fly`
+ 
+    Allows or disallows a player to be able to move around in the air.
+ 
+ - heal `lobby.heal`
+ 
+    Fill a player's heart and hunger, even if it is not necessary!
 
 # Metrics  
 This Plugin uses the Metrics System from [bstats.org](https://bstats.org/)  

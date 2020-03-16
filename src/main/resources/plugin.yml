@@ -15,5 +15,7 @@ commands:
     permission: lobby.push
   fly:
     permission: lobby.fly
+  heal:
+    permission: lobby.heal
 
 softdepend: [PlaceholderAPI, HolographicDisplays, CloudNetAPI]

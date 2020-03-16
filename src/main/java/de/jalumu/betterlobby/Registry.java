@@ -40,6 +40,7 @@ public class Registry {
         registerListener(new InventoryListener());
         registerListener(new WorldInteractionListener());
         registerListener(new WeatherListener());
+        registerListener(new EntityListener());
     }
 
     public void registerCommands(){
@@ -49,6 +50,7 @@ public class Registry {
         registerCommand("spawn", new SpawnCommand());
         registerCommand("push", new PushCommand());
         registerCommand("fly", new FlyCommand());
+        registerCommand("heal", new HealCommand());
     }
 
     public void registerOtherStuff(){

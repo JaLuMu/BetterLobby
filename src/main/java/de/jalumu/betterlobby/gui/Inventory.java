@@ -25,20 +25,20 @@ public class Inventory implements Configurable {
 
     private static InventoryItem friends;
 
-    public static void openTeleporter(Player p) {
-        Teleporter.open(p);
+    public static void openTeleporter(Player player) {
+        Teleporter.open(player);
     }
 
     public static void openPlayerVisibilityMenu(Player p) {
         PlayerVisibilityMenu.open(p);
     }
 
-    public static void openLobbySwitcher(Player p) {
+    public static void openLobbySwitcher(Player player) {
         if (BetterLobby.isCloudnetApiEnabled()) {
-            LobbySwitcher.open(p);
+            LobbySwitcher.open(player);
         } else {
         	// Fruxz | Changed message
-            new Transmission(ChatColor.RED + "This function is currently not available due to the lack of required modules!").send(p);
+            new Transmission(ChatColor.RED + "This function is currently not available due to the lack of required modules!").send(player);
         }
     }
 

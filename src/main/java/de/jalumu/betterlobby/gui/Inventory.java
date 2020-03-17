@@ -3,6 +3,8 @@ package de.jalumu.betterlobby.gui;
 import de.jalumu.betterlobby.BetterLobby;
 import de.jalumu.betterlobby.configuration.Configurable;
 import de.jalumu.betterlobby.util.TextUtil;
+import de.jalumu.betterlobby.visual.Transmission;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.SkullType;
 import org.bukkit.entity.Player;
@@ -35,7 +37,8 @@ public class Inventory implements Configurable {
         if (BetterLobby.isCloudnetApiEnabled()) {
             LobbySwitcher.open(p);
         } else {
-            p.sendMessage("disabled");
+        	// Fruxz | Changed message
+            new Transmission(ChatColor.RED + "This function is currently not available due to the lack of required modules!").send(p);
         }
     }
 

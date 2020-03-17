@@ -7,13 +7,20 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+/**
+ * Deathmatch command
+ *
+ * @version 1.0
+ */
+
 public class DeathmatchCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if (command.getPermission() == null || sender.hasPermission(command.getPermission())) {
             if (args.length == 0) {
-                
+
+                // Edited by Fruxz | commit 175279
                 FightManager.setDeathMatch(!FightManager.isDeathMatch());
 
             } else

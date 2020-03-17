@@ -13,12 +13,8 @@ public class DeathmatchCommand implements CommandExecutor {
 
         if (command.getPermission() == null || sender.hasPermission(command.getPermission())) {
             if (args.length == 0) {
-
-                if (FightManager.isDeathMatch()){
-                    FightManager.setDeathMatch(false);
-                }else {
-                    FightManager.setDeathMatch(true);
-                }
+                
+                FightManager.setDeathMatch(!FightManager.isDeathMatch());
 
             } else
                 new Transmission("Please use " + ChatColor.RED + command.getUsage().replaceAll("<command>", command.getName())).send(sender);

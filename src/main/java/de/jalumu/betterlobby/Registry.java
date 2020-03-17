@@ -2,10 +2,7 @@ package de.jalumu.betterlobby;
 
 import de.jalumu.betterlobby.commands.*;
 import de.jalumu.betterlobby.configuration.Configurable;
-import de.jalumu.betterlobby.gui.Inventory;
-import de.jalumu.betterlobby.gui.InventoryItem;
-import de.jalumu.betterlobby.gui.PlayerVisibilityMenu;
-import de.jalumu.betterlobby.gui.Teleporter;
+import de.jalumu.betterlobby.gui.*;
 import de.jalumu.betterlobby.listener.*;
 import de.jalumu.betterlobby.manager.HologramMannager;
 import de.jalumu.betterlobby.manager.ScoreboardManager;
@@ -31,7 +28,7 @@ public class Registry {
         registerConfig(new Inventory());
         registerConfig(new Teleporter());
         registerConfig(new PlayerVisibilityMenu());
-
+        registerConfig(new LobbySwitcher(betterLobby));
     }
 
     public void registerListeners(){
@@ -51,9 +48,11 @@ public class Registry {
         registerCommand("push", new PushCommand());
         registerCommand("fly", new FlyCommand());
         registerCommand("heal", new HealCommand());
+        registerCommand("deathmatch", new DeathmatchCommand());
     }
 
     public void registerOtherStuff(){
+        Bukkit.getMessenger().registerOutgoingPluginChannel(betterLobby, "BungeeCord");
         registerConfig(new ScoreboardManager(betterLobby));
         new HologramMannager(betterLobby);
     }

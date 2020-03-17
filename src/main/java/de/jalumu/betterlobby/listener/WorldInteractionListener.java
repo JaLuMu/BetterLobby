@@ -1,7 +1,9 @@
 package de.jalumu.betterlobby.listener;
 
+import de.jalumu.betterlobby.BetterLobby;
 import de.jalumu.betterlobby.manager.BuildManager;
 import de.jalumu.betterlobby.manager.FightManager;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -9,7 +11,6 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerItemBreakEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 
@@ -34,6 +35,7 @@ public class WorldInteractionListener implements Listener {
 	public void onPlayerDeath(PlayerDeathEvent event) {
 		event.getDrops().clear();
 		event.getEntity().spigot().respawn();
+		event.getEntity().teleport((Location) BetterLobby.getConfiguration().get("location.spawn"));
 	}
 
 	@EventHandler
@@ -59,6 +61,12 @@ public class WorldInteractionListener implements Listener {
 
 	@EventHandler
 	public void onEntityDamage(EntityDamageByEntityEvent event) {
+
+		if (FightManager.isDeathMatch()){
+			event.setCancelled(false);
+			return;
+		}
+
 		if (event.getDamager() instanceof Player){
 			Player player = (Player)event.getDamager();
 			if (!BuildManager.canBuild(player) ){
@@ -85,7 +93,11 @@ public class WorldInteractionListener implements Listener {
 
 	@EventHandler
 	public void onFoodLevelChange(FoodLevelChangeEvent event) {
-		event.setCancelled(true);
+		if (FightManager.isDeathMatch()){
+			event.setCancelled(false);
+		}else {
+		    event.setCancelled(true);
+		}
 	}
 
 	@EventHandler

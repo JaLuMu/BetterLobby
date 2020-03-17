@@ -42,6 +42,10 @@ dependencies {
     compileOnly 'com.github.filoghost.HolographicDisplays:holographicdisplays-api:770c86947b'
 }
 
+jar{
+    archiveName= "BetterLobby.jar"
+}
+
 import org.apache.tools.ant.filters.ReplaceTokens
 
 processResources {

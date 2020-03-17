@@ -93,7 +93,7 @@ public class Inventory implements Configurable {
 		if (BetterLobby.getConfiguration().getBoolean("inventory.lobbySwitcher.enabled")) {
 			if (lobbySwitcher == null){
 				lobbySwitcher = TextUtil.parse(BetterLobby.getConfiguration().getItemStack("inventory.lobbySwitcher.item"));
-				ItemHelper.registerClickEvent(lobbySwitcher,player -> openLobbySwitcher(player));
+				ItemHelper.registerHotbarClickEvent(BetterLobby.getConfiguration().getInt("inventory.lobbySwitcher.slotId"),player -> openLobbySwitcher(player));
 			}
 			p.getInventory().setItem(BetterLobby.getConfiguration().getInt("inventory.lobbySwitcher.slotId"), lobbySwitcher);
 		}
@@ -136,7 +136,6 @@ public class Inventory implements Configurable {
 				sword = TextUtil.parse(BetterLobby.getConfiguration().getItemStack("inventory.sword.item"));
 			}
 			p.getInventory().setItem(BetterLobby.getConfiguration().getInt("inventory.sword.slotId"), sword);
-			p.sendMessage(BetterLobby.getConfiguration().getInt("inventory.sword.slotId") + "");
 		}
 
 		p.updateInventory();

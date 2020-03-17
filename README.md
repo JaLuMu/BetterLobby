@@ -27,13 +27,17 @@ Changes in this repository will be automatically synchronized with the Minecraft
  
     Shoot a player high into the air! Is he coming back down?
  
- - fly `lobby.fly`
+ - #### fly `lobby.fly`
  
     Allows or disallows a player to be able to move around in the air.
  
- - heal `lobby.heal`
+ - #### heal `lobby.heal`
  
     Fill a player's heart and hunger, even if it is not necessary!
+    
+ - #### deathmatch `lobby.deathmatch`
+ 
+    Each Player has only a half Heart and dies instantly by one hit
 
 # Metrics  
 This Plugin uses the Metrics System from [bstats.org](https://bstats.org/)  

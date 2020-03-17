@@ -10,6 +10,7 @@ import de.jalumu.betterlobby.manager.ScoreboardManager;
 import de.jalumu.betterlobby.util.TextUtil;
 import de.jalumu.betterlobby.util.Title;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -42,9 +43,15 @@ public class JoinLeaveListener implements Listener, Configurable {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 
+		if (FightManager.isDeathMatch()){
+			player.kickPlayer("Deathmatch active");
+		}
+
 		if (healthScale == 0){
 			healthScale = BetterLobby.getConfiguration().getInt("misc.healthScale");
 		}
+
+		player.setGameMode(GameMode.ADVENTURE);
 
 		player.setHealthScale(healthScale);
 		player.setHealthScaled(true);

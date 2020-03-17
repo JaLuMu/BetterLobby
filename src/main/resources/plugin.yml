@@ -17,5 +17,7 @@ commands:
     permission: lobby.fly
   heal:
     permission: lobby.heal
+  deathmatch:
+    permission: lobby.deathmatch
 
 softdepend: [PlaceholderAPI, HolographicDisplays, CloudNetAPI]

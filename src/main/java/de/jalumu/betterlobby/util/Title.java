@@ -4,6 +4,12 @@ import org.bukkit.entity.Player;
 
 import java.lang.reflect.Constructor;
 
+/**
+ * This class helps, to send Titles
+ *
+ * @deprecated This class/system deprecated with {@link TitleMessage}. {@link #send(Player, String, String, int, int, int)} won't work in newer versions.
+ */
+
 public class Title {
 
 
@@ -15,6 +21,8 @@ public class Title {
      * @param fadeInTime defines the time which the popup spend
      * @param showTime defines the time which the hold spend
      * @param fadeOutTime defines the time which the popout spend
+     *
+     * @deprecated with {@link TitleMessage#send(Player)}. Won't work in newer versions.
      */
     public static void send(Player player, String title, String subtitle, int fadeInTime, int showTime, int fadeOutTime) {
         try {

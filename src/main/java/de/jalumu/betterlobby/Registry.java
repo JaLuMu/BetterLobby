@@ -16,22 +16,25 @@ public class Registry {
 
     private BetterLobby betterLobby;
 
-    public Registry(BetterLobby betterLobby){
+    public Registry(BetterLobby betterLobby) {
         this.betterLobby = betterLobby;
     }
 
-    public void registerConfigurationSerializations(){
+    public void registerConfigurationSerializations() {
         registerConfigSerialization(InventoryItem.class);
     }
 
-    public void registerConfigurations(){
+    public void registerConfigurations() {
         registerConfig(new Inventory());
         registerConfig(new Teleporter());
         registerConfig(new PlayerVisibilityMenu());
-        registerConfig(new LobbySwitcher(betterLobby));
+        // The lobby switcher is only registered if the CloudNet API has been loaded
+        if (BetterLobby.isCloudnetApiEnabled()) {
+            registerConfig(new LobbySwitcher(betterLobby));
+        }
     }
 
-    public void registerListeners(){
+    public void registerListeners() {
         registerListener(new JoinLeaveListener());
         registerListener(new MovementListener());
         registerListener(new InventoryListener());
@@ -40,10 +43,10 @@ public class Registry {
         registerListener(new EntityListener());
     }
 
-    public void registerCommands(){
+    public void registerCommands() {
         registerCommand("betterlobby", new BetterLobbyCommand());
         registerCommand("build", new BuildCommand());
-        registerCommand("setSpawn",new SetSpawnCommand());
+        registerCommand("setSpawn", new SetSpawnCommand());
         registerCommand("spawn", new SpawnCommand());
         registerCommand("push", new PushCommand());
         registerCommand("fly", new FlyCommand());
@@ -51,23 +54,23 @@ public class Registry {
         registerCommand("deathmatch", new DeathmatchCommand());
     }
 
-    public void registerOtherStuff(){
+    public void registerOtherStuff() {
         Bukkit.getMessenger().registerOutgoingPluginChannel(betterLobby, "BungeeCord");
         registerConfig(new ScoreboardManager(betterLobby));
         new HologramMannager(betterLobby);
     }
 
-    private void registerCommand(String name, CommandExecutor executor){
+    private void registerCommand(String name, CommandExecutor executor) {
         betterLobby.getCommand(name).setExecutor(executor);
         registerConfig(executor);
     }
 
-    private void registerListener(Listener listener){
-        Bukkit.getPluginManager().registerEvents(listener,betterLobby);
+    private void registerListener(Listener listener) {
+        Bukkit.getPluginManager().registerEvents(listener, betterLobby);
         registerConfig(listener);
     }
 
-    private void registerConfigSerialization(Class<? extends ConfigurationSerializable> c){
+    private void registerConfigSerialization(Class<? extends ConfigurationSerializable> c) {
         ConfigurationSerialization.registerClass(c);
     }
 

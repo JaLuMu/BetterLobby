@@ -1,6 +1,7 @@
 package de.jalumu.betterlobby.util;
 
 import de.jalumu.betterlobby.BetterLobby;
+import de.jalumu.betterlobby.visual.Transmission;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

@@ -1,5 +1,6 @@
 package de.jalumu.betterlobby.visual;
 
+import de.jalumu.betterlobby.BetterLobby;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -10,21 +11,61 @@ import org.bukkit.command.CommandSender;
 
 public class Transmission {
 
-    private String message;
+    private StringBuilder message;
 
+
+    public Transmission(){
+        this.message = new StringBuilder();
+    }
 
     /**
      * @param message Defines the message to be sent to the destinations and processed before
      */
     public Transmission(String message) {
-        this.message = message;
+        this.message = new StringBuilder();
+        this.appendMessagePrefix().appendSpace().appendText(message);
+    }
+
+    public Transmission appendPluginPrefix() {
+        this.resetColor().appendText(BetterLobby.getPluginPrefix()).resetColor();
+        return this;
+    }
+
+    public Transmission appendMessagePrefix() {
+        this.resetColor().appendText(BetterLobby.getMessagePrefix()).resetColor();
+        return this;
+    }
+
+    public Transmission appendSpace() {
+        message.append(" ");
+        return this;
+    }
+
+    public Transmission newLine() {
+        message.append("\n");
+        return this;
+    }
+
+    public Transmission resetColor() {
+        message.append(ChatColor.RESET);
+        return this;
+    }
+
+    public Transmission color(ChatColor color) {
+        message.append(color);
+        return this;
+    }
+
+    public Transmission appendText(String text){
+        message.append(text);
+        return this;
     }
 
     /**
      * @return the processed message which is sent
      */
     public String getTransmissionContent() {
-        return ChatColor.DARK_GRAY + ">> " + ChatColor.GRAY + message;
+        return message.toString();
     }
 
     public void send(CommandSender sender) {
@@ -39,11 +80,4 @@ public class Transmission {
         Bukkit.getConsoleSender().sendMessage(getTransmissionContent());
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }

@@ -1,15 +1,15 @@
 package de.jalumu.betterlobby;
 
 import de.jalumu.betterlobby.metrics.Metrics;
+import de.jalumu.betterlobby.util.TextUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
-public class BetterLobby extends JavaPlugin implements Listener{
+public class BetterLobby extends JavaPlugin {
 
 
     private static boolean placeHolderApiEnabled = false;
@@ -21,6 +21,10 @@ public class BetterLobby extends JavaPlugin implements Listener{
     private static Plugin plugin = null;
 
     private static FileConfiguration configuration;
+
+    private static String pluginPrefix;
+
+    private static String messagePrefix;
 
     private final int pluginId = 6744;
 
@@ -43,6 +47,11 @@ public class BetterLobby extends JavaPlugin implements Listener{
 
         configuration = getConfig();
 
+        getConfiguration().addDefault("plugin.prefix","&eLobby");
+        getConfiguration().addDefault("plugin.messagePrefix","&b>>");
+
+        pluginPrefix = TextUtil.parse(getConfiguration().getString("plugin.prefix"));
+        messagePrefix = TextUtil.parse(getConfiguration().getString("plugin.messagePrefix"));
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null){
             getLogger().info("PlaceholderApi found");
@@ -109,8 +118,11 @@ public class BetterLobby extends JavaPlugin implements Listener{
         plugin.saveConfig();
     }
 
+    public static String getPluginPrefix() {
+        return pluginPrefix;
+    }
 
-
-
-
+    public static String getMessagePrefix() {
+        return messagePrefix;
+    }
 }

@@ -1,5 +1,5 @@
 name: BetterLobby
-version: @version@
+version: DEV
 main: de.jalumu.betterlobby.BetterLobby
 author: JanLuca
 commands:

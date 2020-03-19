@@ -5,11 +5,12 @@ import de.jalumu.betterlobby.configuration.Configurable;
 import de.jalumu.betterlobby.manager.BuildManager;
 import de.jalumu.betterlobby.gui.Inventory;
 import de.jalumu.betterlobby.manager.FightManager;
-import de.jalumu.betterlobby.manager.HologramMannager;
 import de.jalumu.betterlobby.manager.ScoreboardManager;
 import de.jalumu.betterlobby.util.TextUtil;
 import de.jalumu.betterlobby.util.Title;
+import de.jalumu.betterlobby.visual.Transmission;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -36,12 +37,25 @@ public class JoinLeaveListener implements Listener, Configurable {
 		BetterLobby.getConfiguration().addDefault("location.spawn",Bukkit.getWorlds().get(0).getSpawnLocation());
 
 		BetterLobby.getConfiguration().addDefault("misc.healthScale",20);
-
+		BetterLobby.getConfiguration().addDefault("misc.hideJoinLeaveMessages",false);
 	}
 
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
+
+		if (BetterLobby.getConfiguration().getBoolean("misc.hideJoinLeaveMessages")){
+			event.setJoinMessage(null);
+		}else {
+			event.setJoinMessage(new Transmission()
+					.appendMessagePrefix().appendSpace()
+					.color(ChatColor.GOLD)
+					.appendText(player.getDisplayName())
+					.color(ChatColor.DARK_GREEN)
+					.appendText(" joined the game")
+					.getTransmissionContent());
+		}
+
 
 		if (FightManager.isDeathMatch()){
 			player.kickPlayer("Deathmatch active");
@@ -84,8 +98,21 @@ public class JoinLeaveListener implements Listener, Configurable {
 	public void onPlayerLeave(PlayerQuitEvent event) {
 		Player player = event.getPlayer();
 
+		if (BetterLobby.getConfiguration().getBoolean("misc.hideJoinLeaveMessages")){
+			event.setQuitMessage(null);
+		}else {
+			event.setQuitMessage(new Transmission()
+					.appendMessagePrefix().appendSpace()
+					.color(ChatColor.GOLD)
+					.appendText(player.getDisplayName())
+					.color(ChatColor.DARK_RED)
+					.appendText(" left the game")
+					.getTransmissionContent());
+		}
+
 		BuildManager.allowBuilding(player,false);
 		FightManager.allowFight(player,false);
+
 	}
 
 

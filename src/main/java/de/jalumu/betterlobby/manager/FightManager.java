@@ -56,7 +56,7 @@ public class FightManager {
         } else {
             for (Player players : Bukkit.getOnlinePlayers()) {
                 // Fruxz | Now uses the Transmission (coloring) System
-                players.kickPlayer(new Transmission().appendMessagePrefix().appendSpace()
+                players.kickPlayer(new Transmission()
                         .color(ChatColor.RED).appendText("The DeathMatch is now finished!").getTransmissionContent());
                 allowFight(players, false);
             }

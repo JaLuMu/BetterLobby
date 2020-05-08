@@ -57,8 +57,9 @@ public class JoinLeaveListener implements Listener, Configurable {
 		}
 
 
-		if (FightManager.isDeathMatch()){
-			player.kickPlayer("Deathmatch active");
+		if (FightManager.isDeathMatch() && !player.hasPermission("lobby.forcejoin")){
+			player.kickPlayer(new Transmission()
+					.color(ChatColor.RED).appendText("DeathMatch active").getTransmissionContent());
 		}
 
 		if (healthScale == 0){

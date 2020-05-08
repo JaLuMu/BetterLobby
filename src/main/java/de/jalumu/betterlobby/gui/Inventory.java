@@ -37,36 +37,40 @@ public class Inventory implements Configurable {
         if (BetterLobby.isCloudnetApiEnabled()) {
             LobbySwitcher.open(player);
         } else {
-        	// Fruxz | Changed message
-            new Transmission(ChatColor.RED + "This function is currently not available due to the lack of required modules!").send(player);
+            new Transmission().appendMessagePrefix().appendSpace()
+                    .color(ChatColor.GRAY).appendText("This function is currently not available")
+                    .send(player);
         }
     }
 
     public static void createBar(Player p) {
 
         if (BetterLobby.getConfiguration().getBoolean("inventory.teleporter.enabled")) {
+            final int slotId = BetterLobby.getConfiguration().getInt("inventory.teleporter.slotId");
             if (teleporter == null) {
                 teleporter = TextUtil.parse(BetterLobby.getConfiguration().getItemStack("inventory.teleporter.item"));
-                ItemHelper.registerClickEvent(teleporter, player -> openTeleporter(player));
+                ItemHelper.registerHotbarClickEvent(slotId, player -> openTeleporter(player));
             }
-            p.getInventory().setItem(BetterLobby.getConfiguration().getInt("inventory.teleporter.slotId"), teleporter);
+            p.getInventory().setItem(slotId, teleporter);
         }
 
 
         if (BetterLobby.getConfiguration().getBoolean("inventory.playerVisibilityMenu.enabled")) {
+            final int slotId = BetterLobby.getConfiguration().getInt("inventory.playerVisibilityMenu.slotId");
             if (playerVisibility == null) {
                 playerVisibility = TextUtil.parse(BetterLobby.getConfiguration().getItemStack("inventory.playerVisibilityMenu.item"));
-                ItemHelper.registerClickEvent(playerVisibility, player -> openPlayerVisibilityMenu(player));
+                ItemHelper.registerHotbarClickEvent(slotId, player -> openPlayerVisibilityMenu(player));
             }
-            p.getInventory().setItem(BetterLobby.getConfiguration().getInt("inventory.playerVisibilityMenu.slotId"), playerVisibility);
+            p.getInventory().setItem(slotId, playerVisibility);
         }
 
         if (BetterLobby.getConfiguration().getBoolean("inventory.lobbySwitcher.enabled")) {
+            final int slotId = BetterLobby.getConfiguration().getInt("inventory.lobbySwitcher.slotId");
             if (lobbySwitcher == null) {
                 lobbySwitcher = TextUtil.parse(BetterLobby.getConfiguration().getItemStack("inventory.lobbySwitcher.item"));
-                ItemHelper.registerHotbarClickEvent(BetterLobby.getConfiguration().getInt("inventory.lobbySwitcher.slotId"), player -> openLobbySwitcher(player));
+                ItemHelper.registerHotbarClickEvent(slotId, player -> openLobbySwitcher(player));
             }
-            p.getInventory().setItem(BetterLobby.getConfiguration().getInt("inventory.lobbySwitcher.slotId"), lobbySwitcher);
+            p.getInventory().setItem(slotId, lobbySwitcher);
         }
 
 
@@ -77,11 +81,18 @@ public class Inventory implements Configurable {
                 ItemHelper.registerHotbarClickEvent(friends.getIndex(), new ClickEvent() {
                     @Override
                     public void onClick(Player player) {
+                        /**
                         if (friends.getClickAction() == ClickAction.COMMAND) {
                             ClickEvents.commandEvent(player, friends.getTarget());
                         } else if (friends.getClickAction() == ClickAction.TELEPORT) {
                             ClickEvents.teleportEvent(player, friends.getTarget());
                         }
+                         */
+
+                        new Transmission().appendMessagePrefix().appendSpace()
+                                .color(ChatColor.GRAY).appendText("This option will be available in the future")
+                                .send(player);
+
                     }
                 });
             }

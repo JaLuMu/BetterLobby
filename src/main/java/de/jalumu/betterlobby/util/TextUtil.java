@@ -1,7 +1,6 @@
 package de.jalumu.betterlobby.util;
 
 import de.jalumu.betterlobby.BetterLobby;
-import de.jalumu.betterlobby.visual.Transmission;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -14,7 +13,11 @@ import java.util.List;
 public class TextUtil {
 
     public static String parse(String text){
-        return ChatColor.translateAlternateColorCodes('&',text);
+       if (text != null){
+           return ChatColor.translateAlternateColorCodes('&',text);
+       }else {
+           return null;
+       }
     }
 
     public static String parse(String text, Player player){

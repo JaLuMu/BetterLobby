@@ -13,18 +13,9 @@ public class BuildCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if (sender instanceof Player){
-            Player player = (Player)sender;
-            if (BuildManager.canBuild(player)){
-                BuildManager.allowBuilding(player,false);
-                new Transmission().appendPluginPrefix().appendSpace().appendMessagePrefix().appendSpace()
-                        .color(RED).appendText("Build mode off").send(sender);
-            }else {
-                BuildManager.allowBuilding(player,true);
-                new Transmission().appendPluginPrefix().appendSpace().appendMessagePrefix().appendSpace()
-                        .color(GREEN).appendText("Build mode on").send(sender);
-            }
+            BuildManager.toggleBuildMode((Player)sender);
         }else {
-            new Transmission().appendPluginPrefix().appendSpace().appendMessagePrefix().appendSpace()
+            new Transmission().appendMessagePrefix().appendSpace()
                     .color(RED).appendText("You are not a player").send(sender);
         }
 

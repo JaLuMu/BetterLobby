@@ -2,6 +2,7 @@ package de.jalumu.betterlobby.gui;
 
 
 import de.jalumu.betterlobby.BetterLobby;
+import de.jalumu.betterlobby.manager.BuildManager;
 import de.jalumu.betterlobby.util.TextUtil;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -84,6 +85,11 @@ public class ItemHelper {
     }
 
     public static void handleInteraction(PlayerInteractEvent event){
+
+        if (BuildManager.canBuild(event.getPlayer())){
+            return;
+        }
+
         if (hotbarEvents.containsKey(event.getPlayer().getInventory().getHeldItemSlot())){
             hotbarEvents.get(event.getPlayer().getInventory().getHeldItemSlot()).onClick(event.getPlayer());
         }

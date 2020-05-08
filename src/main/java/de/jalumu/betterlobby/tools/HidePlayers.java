@@ -2,7 +2,9 @@ package de.jalumu.betterlobby.tools;
 
 import java.util.ArrayList;
 
+import de.jalumu.betterlobby.visual.Transmission;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -20,16 +22,26 @@ public class HidePlayers{
 		for (Player players : Bukkit.getOnlinePlayers()){
 			player.showPlayer(players);
 		}
+		new Transmission().appendMessagePrefix().appendSpace()
+				.color(ChatColor.GRAY).appendText("All Players are").appendSpace()
+				.color(ChatColor.GREEN).appendText("Visible")
+				.send(player);
 	}
 
 	public static void showVipPlayers(Player player){
-		player.sendMessage("WIP");
+		new Transmission().appendMessagePrefix().appendSpace()
+				.color(ChatColor.GRAY).appendText("This option will be available in the future")
+				.send(player);
 	}
 
 	public static void hideAllPlayers(Player player){
 		for (Player players : Bukkit.getOnlinePlayers()){
 			player.hidePlayer(players);
 		}
+		new Transmission().appendMessagePrefix().appendSpace()
+				.color(ChatColor.GRAY).appendText("All Players are").appendSpace()
+				.color(ChatColor.RED).appendText("Invisible")
+				.send(player);
 	}
 
 

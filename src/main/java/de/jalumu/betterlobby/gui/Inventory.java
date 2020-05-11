@@ -21,6 +21,8 @@ public class Inventory implements Configurable {
 
     private static ItemStack lobbySwitcher;
 
+    private static ItemStack gadgets;
+
     private static ItemStack sword;
 
     private static InventoryItem friends;
@@ -29,8 +31,12 @@ public class Inventory implements Configurable {
         Teleporter.open(player);
     }
 
-    public static void openPlayerVisibilityMenu(Player p) {
-        PlayerVisibilityMenu.open(p);
+    public static void openPlayerVisibilityMenu(Player player) {
+        PlayerVisibilityMenu.open(player);
+    }
+
+    public static void openGadgets(Player player) {
+        GadgetsMenu.open(player);
     }
 
     public static void openLobbySwitcher(Player player) {
@@ -62,6 +68,15 @@ public class Inventory implements Configurable {
                 ItemHelper.registerHotbarClickEvent(slotId, player -> openPlayerVisibilityMenu(player));
             }
             p.getInventory().setItem(slotId, playerVisibility);
+        }
+
+        if (BetterLobby.getConfiguration().getBoolean("inventory.gadgets.enabled")) {
+            final int slotId = BetterLobby.getConfiguration().getInt("inventory.gadgets.slotId");
+            if (gadgets == null) {
+                gadgets = TextUtil.parse(BetterLobby.getConfiguration().getItemStack("inventory.gadgets.item"));
+                ItemHelper.registerHotbarClickEvent(slotId, player -> openGadgets(player));
+            }
+            p.getInventory().setItem(slotId, gadgets);
         }
 
         if (BetterLobby.getConfiguration().getBoolean("inventory.lobbySwitcher.enabled")) {
@@ -151,6 +166,13 @@ public class Inventory implements Configurable {
         BetterLobby.getConfiguration().addDefault("inventory.sword.slotId", 3);
         ItemStack sword = ItemHelper.getItemStack(Material.IRON_SWORD, "&6&lLets Fight", 1, Arrays.asList("&4Fight with other Players"));
         BetterLobby.getConfiguration().addDefault("inventory.sword.item", sword);
+
+        BetterLobby.getConfiguration().addDefault("inventory.gadgets.enabled", true);
+        BetterLobby.getConfiguration().addDefault("inventory.gadgets.slotId", 5);
+
+        ItemStack gadgets = ItemHelper.getItemStack(Material.CHEST, "&6&Gadgets", 1, Arrays.asList());
+        BetterLobby.getConfiguration().addDefault("inventory.gadgets.item", gadgets);
+
     }
 
 }

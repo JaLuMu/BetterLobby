@@ -2,6 +2,7 @@ name: BetterLobby
 version: DEV
 main: de.jalumu.betterlobby.BetterLobby
 author: JanLuca
+
 commands:
   betterlobby:
     description: Shows plugin infos
